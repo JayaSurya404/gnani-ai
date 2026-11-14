@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveOrganizationId } from "@/actions/organization";
+import { getSessionContext } from "@/lib/permissions";
 
 export const dynamic = "force-dynamic";
 
@@ -65,6 +66,14 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json({ success: false, error: "Invalid JSON payload" }, { status: 400 });
@@ -145,6 +154,14 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || !body.id) {
       return NextResponse.json({ success: false, error: "Product id is required" }, { status: 400 });
@@ -200,6 +217,14 @@ export async function PATCH(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     const hardDelete = searchParams.get("hard") === "true";

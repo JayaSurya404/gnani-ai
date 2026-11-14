@@ -15,22 +15,26 @@ function LoginFormContent() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [isDevLoading, setIsDevLoading] = useState(false);
-  const isDev = process.env.NODE_ENV !== "production";
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
+  const [demoNotice, setDemoNotice] = useState<string | null>(null);
 
-  const handleDevAutofill = async () => {
-    setIsDevLoading(true);
+  const handleDemoAutofill = async () => {
+    setIsDemoLoading(true);
+    setDemoNotice(null);
     try {
-      const res = await fetch("/api/dev/credentials");
+      const res = await fetch("/api/demo/credentials");
       if (res.ok) {
         const data = await res.json();
         if (data.email) setEmail(data.email);
         if (data.password) setPassword(data.password);
+        setDemoNotice("Sample workspace credentials filled. Click 'Sign In to Workspace' to enter the preconfigured business workspace.");
+      } else {
+        setDemoNotice("Preview credentials are unavailable on this server.");
       }
     } catch {
-      // safe ignore
+      setDemoNotice("Unable to reach preview credentials service.");
     } finally {
-      setIsDevLoading(false);
+      setIsDemoLoading(false);
     }
   };
 
@@ -59,23 +63,34 @@ function LoginFormContent() {
           </p>
         </div>
 
-        {isDev && (
-          <div className="mb-5 flex items-center justify-between rounded-xl border border-dashed border-amber-300 bg-amber-50/80 px-3.5 py-2.5">
+        {/* Project Preview Access Card */}
+        <div className="mb-5 rounded-xl border border-orange-200/90 bg-gradient-to-r from-orange-50/90 via-amber-50/70 to-orange-50/90 p-3.5 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="space-y-0.5">
-              <span className="text-[11px] font-semibold text-amber-900">Local Development Environment</span>
-              <p className="text-[10px] text-amber-700">Autofill verified company credentials from .env.local</p>
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-orange-600" />
+                <span className="text-xs font-bold text-slate-900">Project Preview Access</span>
+              </div>
+              <p className="text-[11px] text-slate-600 leading-snug">
+                Explore the VoiceNexus workspace using a preconfigured sample business account.
+              </p>
             </div>
             <button
               type="button"
-              onClick={handleDevAutofill}
-              disabled={isDevLoading}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-amber-600 px-2.5 py-1.5 text-[11px] font-semibold text-white shadow-xs hover:bg-amber-700 disabled:opacity-50 transition-colors"
+              onClick={handleDemoAutofill}
+              disabled={isDemoLoading}
+              className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-orange-700 disabled:opacity-50 transition-colors cursor-pointer"
             >
-              {isDevLoading ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
-              Fill Company Credentials
+              {isDemoLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+              <span>Fill Company Credentials</span>
             </button>
           </div>
-        )}
+          {demoNotice && (
+            <p className="mt-2.5 text-[11px] font-medium text-orange-800 bg-orange-100/70 rounded-md px-2.5 py-1">
+              {demoNotice}
+            </p>
+          )}
+        </div>
 
         {error && (
           <div className="mb-5 flex items-start gap-2.5 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">

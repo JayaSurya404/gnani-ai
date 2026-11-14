@@ -158,9 +158,9 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
   ],
 
   teamMembers: [
-    { id: "mem-1", name: "Surya", email: "surya@voicenexus.ai", role: "OWNER" },
-    { id: "mem-2", name: "Praveen", email: "praveen@aadhirasolar.com", role: "MANAGER" },
-    { id: "mem-3", name: "Meena", email: "meena@aadhirasolar.com", role: "AGENT" },
+    { id: "mem-1", name: "Kaveri Solar Admin", email: "admin@kaverisolar.in", role: "OWNER" },
+    { id: "mem-2", name: "Praveen Kumar", email: "praveen@kaverisolar.in", role: "MANAGER" },
+    { id: "mem-3", name: "Meena Sundaram", email: "meena@kaverisolar.in", role: "AGENT" },
   ],
 
   addLead: (leadInput) => {

@@ -6,6 +6,7 @@ import { storeSessionAudio } from "@/lib/telephony/audio-cache";
 import { dispatchCallEventToLeadNexus } from "@/lib/integrations/reverse-sync-dispatcher";
 import { checkAndReconcileActiveCalls } from "@/lib/telephony/active-call-reconciliation";
 import { resolveCanonicalVoice, normalizeLanguageCode } from "@/lib/voice-profiles";
+import { getSessionContext } from "@/lib/permissions";
 import twilio from "twilio";
 
 export const dynamic = "force-dynamic";
@@ -29,6 +30,17 @@ export async function POST(req: Request) {
           missingConfig: true,
         },
         { status: 503 }
+      );
+    }
+
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Live carrier calling is restricted to authorized business owners.",
+        },
+        { status: 403 }
       );
     }
 

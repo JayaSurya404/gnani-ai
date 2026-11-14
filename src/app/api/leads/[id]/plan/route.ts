@@ -28,8 +28,8 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
     }
 
     // 2. Fetch Business Profile
-    let businessName = "Aadhira Solar Tech";
-    let businessCity = "Chennai";
+    let businessName = "Kaveri Solar & Construction";
+    let businessCity = "Coimbatore";
     if (lead.business_id) {
       const { data: biz } = await supabase
         .from("businesses")

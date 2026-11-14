@@ -303,7 +303,7 @@ export async function POST(req: Request) {
                       })),
                       customerName: session.customer_name || "Customer",
                       customerPhone: session.customer_phone || undefined,
-                      businessName: "Aadhira Solar Tech",
+                      businessName: "Kaveri Solar & Construction",
                       customerInterest: "Rooftop Solar",
                     });
 

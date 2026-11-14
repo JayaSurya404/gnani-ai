@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveOrganizationId } from "@/actions/organization";
+import { getSessionContext } from "@/lib/permissions";
 
 export async function GET(req: NextRequest) {
   try {
@@ -65,6 +66,14 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json({ success: false, error: "Invalid JSON payload" }, { status: 400 });
@@ -160,7 +169,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Upsert business_pages
-    const cleanSlug = (slug || "aadhira-solar").trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    const cleanSlug = (slug || "kaveri-solar-construction").trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
 
     const { data: existingPage } = await supabase
       .from("business_pages")

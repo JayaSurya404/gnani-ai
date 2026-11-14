@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveOrganizationId } from "@/actions/organization";
 import { DEFAULT_SYSTEM_PROMPTS } from "@/lib/prompt-templates";
+import { getSessionContext } from "@/lib/permissions";
 
 export async function GET(req: NextRequest) {
   try {
@@ -43,7 +44,7 @@ export async function GET(req: NextRequest) {
         status: a.status,
         activeVersion: activeVer?.version_number || "v1.0",
         systemPrompt: activeVer?.system_prompt || DEFAULT_SYSTEM_PROMPTS.solar_qualifier,
-        greetingMessage: activeVer?.greeting_message || "Vanakkam! I am an AI consultant calling from Aadhira Solar.",
+        greetingMessage: activeVer?.greeting_message || "Vanakkam! I am an AI consultant calling from Kaveri Solar & Construction.",
         turnTimeoutMs: activeVer?.turn_timeout_ms || 2500,
         maxDurationSeconds: activeVer?.max_duration_seconds || 600,
         versionCount: versions.length,
@@ -60,6 +61,14 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || !body.name || !body.roleTitle) {
       return NextResponse.json({ success: false, error: "Agent name and role are required." }, { status: 400 });
@@ -98,7 +107,7 @@ export async function POST(req: NextRequest) {
 
     // Insert initial version v1.0
     const initialPrompt = body.systemPrompt || DEFAULT_SYSTEM_PROMPTS.solar_qualifier;
-    const initialGreeting = body.greetingMessage || "Vanakkam! I am an AI consultant calling from Aadhira Solar Tech.";
+    const initialGreeting = body.greetingMessage || "Vanakkam! I am an AI consultant calling from Kaveri Solar & Construction.";
 
     const { data: newVersion, error: vErr } = await supabase
       .from("agent_versions")

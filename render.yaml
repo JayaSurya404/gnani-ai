@@ -4,12 +4,18 @@ services:
     runtime: node
     plan: free
     region: singapore
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm run start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DEMO_ACCESS_ENABLED
+        value: "true"
+      - key: DEMO_EVALUATOR_EMAIL
+        value: preview@voicenexus.ai
+      - key: DEMO_EVALUATOR_PASSWORD
+        sync: false
       - key: ALLOWED_ORIGIN
         value: https://gnaniai404.vercel.app
       - key: NEXT_PUBLIC_APP_URL

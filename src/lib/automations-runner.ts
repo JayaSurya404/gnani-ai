@@ -86,7 +86,7 @@ export const DEFAULT_BUSINESS_AUTOMATIONS: Array<Omit<AutomationRule, "id" | "or
     actionConfig: {
       notificationChannel: "WHATSAPP",
       notificationTemplate:
-        "Hello {{customer_name}}, thank you for speaking with Aadhira Solar. Your central PM Surya Ghar subsidy estimate of up to ₹78,000 has been prepared. Review your proposal here: {{proposal_link}}",
+        "Hello {{customer_name}}, thank you for speaking with Kaveri Solar & Construction. Your quotation and government subsidy estimate has been prepared. Review your proposal here: {{proposal_link}}",
     },
     status: "ACTIVE",
   },

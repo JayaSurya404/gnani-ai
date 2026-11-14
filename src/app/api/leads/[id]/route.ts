@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { getSessionContext, maskPhone, maskEmail } from "@/lib/permissions";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -72,9 +73,16 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
       .eq("lead_id", id)
       .order("created_at", { ascending: false });
 
+    const session = await getSessionContext();
+    const sanitizedLead = {
+      ...lead,
+      phone: session.isEvaluator ? maskPhone(lead.phone) : lead.phone,
+      email: session.isEvaluator ? (lead.email ? maskEmail(lead.email) : null) : lead.email,
+    };
+
     return NextResponse.json({
       success: true,
-      lead,
+      lead: sanitizedLead,
       events: events || [],
       calls: calls || [],
       followUps: followUps || [],
@@ -87,6 +95,14 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 
 export async function PATCH(req: NextRequest, { params }: RouteParams) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const { id } = await params;
     const body = await req.json().catch(() => null);
 

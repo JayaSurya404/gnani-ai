@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveOrganizationId } from "@/actions/organization";
 import { calculateLeadIntelligence } from "@/lib/lead-intelligence";
+import { getSessionContext, maskPhone, maskEmail } from "@/lib/permissions";
 
 export async function GET(req: NextRequest) {
   try {
@@ -44,11 +45,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 
+    const session = await getSessionContext();
+
     const leads = (dbLeads || []).map((l) => ({
       id: l.id,
       name: l.name,
-      phone: l.phone,
-      email: l.email ?? undefined,
+      phone: session.isEvaluator ? maskPhone(l.phone) : l.phone,
+      email: session.isEvaluator ? (l.email ? maskEmail(l.email) : undefined) : (l.email ?? undefined),
       temperature: l.temperature,
       status: l.status,
       score: l.score,
@@ -70,6 +73,14 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getSessionContext();
+    if (session.isEvaluator) {
+      return NextResponse.json(
+        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json({ success: false, error: "Invalid payload" }, { status: 400 });

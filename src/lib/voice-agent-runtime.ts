@@ -63,7 +63,7 @@ export function processVoiceTurn(request: VoiceTurnRequest): VoiceTurnResponse {
   const lower = request.userMessage.toLowerCase().trim();
   const detectedLang = detectCallerLanguage(request.userMessage);
   const leadName = request.leadContext?.name || "Sir";
-  const business = request.businessName || "Aadhira Solar Tech";
+  const business = request.businessName || "Kaveri Solar & Construction";
 
   // 1. DO-NOT-CALL / OPT-OUT DETECTION (Safety Guardrail)
   const dncKeywords = ["not interested", "don't call", "dont call", "stop calling", "remove my number", "wrong number", "never call"];
@@ -126,9 +126,9 @@ export function processVoiceTurn(request: VoiceTurnRequest): VoiceTurnResponse {
   // B. Pricing & Cost Quotations
   else if (lower.includes("price") || lower.includes("cost") || lower.includes("rate") || lower.includes("evvalavu") || lower.includes("budget") || lower.includes("quote")) {
     if (request.languageMode === "TAMIL" || detectedLang === "ta") {
-      responseText = `Aadhira Solar-il 3kW residential system subsidy-ku pin ₹1.4 Lakhs mudhal ₹1.8 Lakhs varai aagum. Idhil Tier-1 panels mattrum 25 varuda warranty adangum. Namma engineer ungal roof-ai inspect seiya oru naal kurikka mudiyuma?`;
+      responseText = `Kaveri Solar-il 3kW residential system subsidy-ku pin ₹1.4 Lakhs mudhal ₹1.8 Lakhs varai aagum. Idhil Tier-1 panels mattrum 25 varuda warranty adangum. Namma engineer ungal roof-ai inspect seiya oru naal kurikka mudiyuma?`;
     } else if (request.languageMode === "TANGLISH" || detectedLang === "tanglish") {
-      responseText = `Aadhira Solar-la 3kW turnkey setup subsidy kazhichu around ₹1.4 to ₹1.8 Lakhs varum ${leadName}. 25-years warranty ulla bifacial mono-PERC panels tharom. Roof shadow check panna namma team nerla varalaama?`;
+      responseText = `Kaveri Solar-la 3kW turnkey setup subsidy kazhichu around ₹1.4 to ₹1.8 Lakhs varum ${leadName}. 25-years warranty ulla bifacial mono-PERC panels tharom. Roof shadow check panna namma team nerla varalaama?`;
     } else {
       responseText = `A standard 3kW turnkey system ranges between ₹1.4 Lakhs to ₹1.8 Lakhs after applying the central subsidy. This includes Tier-1 monocrystalline panels with a 25-year performance warranty and net meter approval. Would you like a site engineer to conduct a free shadow assessment?`;
     }

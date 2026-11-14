@@ -75,7 +75,7 @@ export async function POST(
       transcripts: turns,
       customerName: session.customer_name || lead?.name || "Customer",
       customerPhone: session.customer_phone || lead?.phone || undefined,
-      businessName: "Aadhira Solar Tech",
+      businessName: "Kaveri Solar & Construction",
       customerInterest: lead?.primary_interest || "Rooftop Solar",
     });
 

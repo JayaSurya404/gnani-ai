@@ -1,0 +1,85 @@
+{
+  "step1_public_page": {
+    "status": "PASS",
+    "httpStatus": 200,
+    "hasBusinessName": true,
+    "hasPhone": true,
+    "hasProduct": true,
+    "hasForm": true
+  },
+  "step2_submit_enquiry": {
+    "status": "PASS",
+    "leadId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "score": 90,
+    "temperature": "HOT"
+  },
+  "step3_supabase_persistence": {
+    "status": "NEW",
+    "dbLeadId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "name": "Senthil Nathan (QA Test)",
+    "phone": "+919840911223",
+    "email": "senthil.nathan@testsolar.in",
+    "temperature": "HOT",
+    "score": 90,
+    "primaryInterest": "3kW Residential Surya Package",
+    "notes": "Selected package: 3kW Residential Surya Package (SKU: RES-3KW-MNRE)",
+    "source": "Public Page (aadhira-solar)",
+    "organizationId": "c81e8a53-b2db-4162-b8bd-484b6f11a0fa",
+    "businessId": "da529808-d579-40cc-85bf-03aba897820b",
+    "createdAt": "2026-11-13T13:57:46.257746+00:00"
+  },
+  "step4_leads_dashboard_sync": {
+    "status": "PASS",
+    "crmLead": {
+      "id": "baba8708-87db-46b7-869c-597ab32b436b",
+      "name": "Senthil Nathan (QA Test)",
+      "phone": "+919840911223",
+      "email": "senthil.nathan@testsolar.in",
+      "temperature": "HOT",
+      "status": "NEW",
+      "score": 90,
+      "primaryInterest": "3kW Residential Surya Package",
+      "source": "Public Page (aadhira-solar)"
+    }
+  },
+  "step5_call_with_ai_experience": {
+    "status": "PASS",
+    "planAvailable": true
+  },
+  "step6_conversation_plan_accuracy": {
+    "status": "PASS",
+    "mentionsCustomer": true,
+    "mentionsProduct": true,
+    "hasTamilGreeting": true,
+    "objective": "Qualify Senthil Nathan (QA Test)'s requirements for 3kW Residential Surya Package, confirm rooftop feasibility in Chennai, and schedule an on-site technical inspection.",
+    "openingGreeting": "வணக்கம் Senthil Nathan (QA Test)! நான் Aadhira Solar Tech நிறுவனத்திலிருந்து பேசுகிறேன். நீங்கள் 3kW Residential Surya Package குறித்து வினவியிருந்தீர்கள். உங்கள் தேவைகளை அறிந்துகொள்ள 2 நிமிடங்கள் பேசலாமா?",
+    "discoveryQuestionsCount": 4,
+    "objectionsCount": 3,
+    "escalationTrigger": "If the customer requests utility-scale financing (>100kW), structural rooftop modification, or expresses dissatisfaction, initiate immediate human escalation or promise a senior engineer callback within 30 minutes."
+  },
+  "step7_canonical_id_consistency": {
+    "status": "PASS",
+    "canonicalLeadId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "enquiryReturnedId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "supabaseRecordId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "crmFeedId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "planLeadId": "baba8708-87db-46b7-869c-597ab32b436b"
+  },
+  "step8_timeline_empty_call_history": {
+    "status": "PASS",
+    "httpStatus": 200,
+    "apiCallsCount": 0,
+    "dbCallSessionsCount": 0,
+    "leadStatus": "NEW"
+  },
+  "step9_duplicate_prevention": {
+    "status": "PASS",
+    "matchedRecordsCount": 1,
+    "matchingLeadId": "baba8708-87db-46b7-869c-597ab32b436b"
+  },
+  "step10_clean_up": {
+    "status": "PASS",
+    "cleanedTestLeadId": "baba8708-87db-46b7-869c-597ab32b436b",
+    "verifiedDeleted": true
+  }
+}

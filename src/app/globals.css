@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F3F5FA;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-hover: rgba(255, 255, 255, 0.92);
+  --surface-elevated: #FFFFFF;
+  --surface-card: rgba(255, 255, 255, 0.72);
+  --border: rgba(226, 232, 240, 0.85);
+  --border-strong: rgba(203, 213, 225, 0.95);
+  --border-glass: rgba(255, 255, 255, 0.9);
+  
+  --foreground: #192238;
+  --foreground-muted: #778198;
+  --foreground-subtle: #94A3B8;
+  
+  --brand-primary: #7065E8;
+  --brand-hover: #5347C8;
+  --brand-light: #F0EFFF;
+  --brand-cyan: #70C9D8;
+  --brand-muted: rgba(112, 101, 232, 0.12);
+  
+  --status-hot: #EF4444;
+  --status-hot-bg: rgba(239, 68, 68, 0.08);
+  --status-warm: #D97706;
+  --status-warm-bg: rgba(217, 119, 6, 0.08);
+  --status-cold: #64748B;
+  --status-cold-bg: rgba(100, 116, 139, 0.08);
+  --status-success: #10B981;
+  --status-success-bg: rgba(16, 185, 129, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(112, 101, 232, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(112, 201, 216, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(112, 101, 232, 0.04) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings typographic balance */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  color: var(--foreground);
+}
+
+/* Tabular numbers for financial, metrics, and duration numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* iOS Liquid Glass Card styles */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px -5px rgba(112, 101, 232, 0.06), 0 4px 12px -2px rgba(25, 34, 56, 0.03);
+}
+
+.liquid-glass-elevated {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px -12px rgba(112, 101, 232, 0.1), 0 6px 16px -4px rgba(25, 34, 56, 0.04);
+}
+
+.liquid-glass-input {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(203, 213, 225, 0.75);
+  color: #192238;
+}
+
+.liquid-glass-input:focus {
+  border-color: #7065E8;
+  box-shadow: 0 0 0 3px rgba(112, 101, 232, 0.15);
+}
+
+/* Subtle modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Minimum touch target utility for mobile */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}

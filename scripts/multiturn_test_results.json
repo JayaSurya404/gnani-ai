@@ -1,0 +1,50 @@
+{
+  "test1_speech_received": {
+    "status": "PASS",
+    "httpStatus": 200,
+    "contentType": "text/xml; charset=utf-8"
+  },
+  "test6_next_gather_present": {
+    "status": "PASS",
+    "hasGather": true
+  },
+  "test7_session_id_retained": {
+    "status": "PASS",
+    "sessionId": "bec45b65-ae82-47db-a195-d624d0750679",
+    "retainedInXml": true
+  },
+  "test3_caller_transcript_saved": {
+    "status": "PASS",
+    "callerText": "சோலார் வீட்ல போடலாம்னு இருக்கேன், ரெண்டு ஃப்ளோர் வீடு",
+    "confidence": 0.85
+  },
+  "test2_speech_reached_llm": {
+    "status": "PASS",
+    "llmResponseText": "புரிகிறதுங்க. Aadhira Solar Tech மூலம் உங்கள் தேவைகளை நிறைவேற்ற, உங்கள் தேவை அல்லது மாதாந்திர மின்கட்டணம் பற்றி கூற முடியுமா?",
+    "isRepeatedFallbackGreeting": false
+  },
+  "test4_agent_response_generated": {
+    "status": "PASS",
+    "text": "புரிகிறதுங்க. Aadhira Solar Tech மூலம் உங்கள் தேவைகளை நிறைவேற்ற, உங்கள் தேவை அல்லது மாதாந்திர மின்கட்டணம் பற்றி கூற முடியுமா?"
+  },
+  "test5_playable_audio_generated": {
+    "status": "PASS",
+    "audioId": "aud_52dc7eaf9f4574c400ff986bcc6c9acd",
+    "bytes": 250924,
+    "contentType": "audio/wav"
+  },
+  "test8_empty_speech_retry": {
+    "status": "PASS",
+    "includesRetryGather": true,
+    "actionHasEmptyTurnsIncrement": true
+  },
+  "test9_invalid_session_handled_safely": {
+    "status": "PASS",
+    "httpStatus": 200
+  },
+  "test10_multiturn_history_preserved": {
+    "status": "PASS",
+    "totalRecordedSegments": 4,
+    "latestAgentAnswer": "எங்கள் 3kW Residential Surya Package (₹1,95,000 (Before Subsidy)) கிடைக்கும். உங்கள் தேவையை மதிப்பீடு செய்ய ஒரு தள ஆய்வை திட்டமிடலாமா?"
+  }
+}

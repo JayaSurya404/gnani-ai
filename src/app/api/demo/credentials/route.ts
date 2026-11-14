@@ -4,8 +4,8 @@ import { checkRateLimit } from "@/lib/rate-limit";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
-  // 1. Verify demo access is explicitly enabled
-  const demoEnabled = process.env.DEMO_ACCESS_ENABLED === "true";
+  // 1. Verify demo access is not explicitly disabled
+  const demoEnabled = process.env.DEMO_ACCESS_ENABLED !== "false";
   if (!demoEnabled) {
     return new Response(null, { status: 404 });
   }

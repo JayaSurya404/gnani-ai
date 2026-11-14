@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: gnaniai404
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGIN
+        value: https://gnaniai404.vercel.app
+      - key: NEXT_PUBLIC_APP_URL
+        value: https://gnaniai404.vercel.app
+      - key: GNANI_PRISMA_WS_URL
+        value: wss://api.vachana.ai/stt/v3/stream
+      - key: GNANI_TIMBRE_WS_URL
+        value: wss://api.vachana.ai/api/v1/tts
+      - key: GEMINI_MODEL
+        value: gemini-flash-lite-latest
+      - key: LIVE_TURN_TTS_TIMEOUT_MS
+        value: "6000"
+      # Secure Server-Only Credentials (configure via Render Dashboard UI)
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_VOICE_NUMBER
+        sync: false
+      - key: TWILIO_WHATSAPP_NUMBER
+        sync: false
+      - key: TWILIO_WEBHOOK_BASE_URL
+        sync: false
+      - key: GNANI_API_KEY_ID
+        sync: false
+      - key: GNANI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false

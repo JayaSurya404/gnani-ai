@@ -12,8 +12,6 @@ services:
         value: production
       - key: OWNER_CREDENTIAL_FILL_ENABLED
         value: "true"
-      - key: OWNER_CREDENTIAL_FILL_KEY
-        sync: false
       - key: DEV_COMPANY_EMAIL
         sync: false
       - key: DEV_COMPANY_PASSWORD

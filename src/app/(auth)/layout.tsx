@@ -23,7 +23,7 @@ export default function AuthLayout({
         </Link>
         <div className="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-600 bg-white border border-slate-200/80 shadow-sm px-3 py-1.5 rounded-full">
           <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
-          <span>SOC2-Ready Tenant Isolation & Supabase RLS</span>
+          <span>Organization data is isolated using Supabase Row Level Security (RLS).</span>
         </div>
       </header>
 

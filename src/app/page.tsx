@@ -35,14 +35,6 @@ export default function LandingPage() {
             <VoiceNexusLogo />
           </Link>
 
-          <div className="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-600">
-            <a href="#about" className="hover:text-slate-900 transition-colors">What is VoiceNexus</a>
-            <a href="#how-it-works" className="hover:text-slate-900 transition-colors">How It Works</a>
-            <a href="#modules" className="hover:text-slate-900 transition-colors">Product Modules</a>
-            <a href="#use-case" className="hover:text-slate-900 transition-colors">Kaveri Solar Case Study</a>
-            <a href="#security" className="hover:text-slate-900 transition-colors">Security &amp; Isolation</a>
-          </div>
-
           <div className="flex items-center gap-3">
             <Link href="/p/kaveri-solar-construction" target="_blank" className="hidden sm:inline-flex">
               <Button variant="ghost" size="sm" className="text-xs font-semibold text-slate-700 hover:text-slate-900 gap-1.5">

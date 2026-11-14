@@ -149,7 +149,7 @@ export default function RegisterPage() {
         {/* Security badge */}
         <div className="flex items-center gap-2 rounded-xl bg-slate-50 p-2.5 text-[11px] text-slate-600 border border-slate-200/60">
           <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
-          <span>Every organization receives isolated database rows enforced via Supabase RLS policies.</span>
+          <span>Organization data is isolated using Supabase Row Level Security (RLS).</span>
         </div>
 
         {/* Submit Button */}

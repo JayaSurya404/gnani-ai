@@ -3,7 +3,6 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveOrganizationId } from "@/actions/organization";
 import { DEFAULT_SYSTEM_PROMPTS } from "@/lib/prompt-templates";
-import { getSessionContext } from "@/lib/permissions";
 
 export async function GET(req: NextRequest) {
   try {
@@ -61,14 +60,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getSessionContext();
-    if (session.isEvaluator) {
-      return NextResponse.json(
-        { success: false, error: "Action forbidden: Evaluator preview account has read-only permissions." },
-        { status: 403 }
-      );
-    }
-
     const body = await req.json().catch(() => null);
     if (!body || !body.name || !body.roleTitle) {
       return NextResponse.json({ success: false, error: "Agent name and role are required." }, { status: 400 });

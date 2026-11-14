@@ -111,16 +111,6 @@ function CallsContent() {
   // Call Plan State
   const [callPlan, setCallPlan] = useState<CallPlan | null>(null);
   const [isLoadingPlan, setIsLoadingPlan] = useState(false);
-  const [isEvaluator, setIsEvaluator] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/auth/me")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d?.isEvaluator) setIsEvaluator(true);
-      })
-      .catch(() => {});
-  }, []);
 
   // Active In-Flight Call State
   const [activeCallSession, setActiveCallSession] = useState<{
@@ -285,10 +275,6 @@ function CallsContent() {
 
   const handleStartCall = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isEvaluator) {
-      toast.error("Live carrier calling is restricted to authorized business owners.");
-      return;
-    }
     if (!dncConfirmed || !consentConfirmed) {
       toast.error("Please confirm pre-call compliance requirements before dispatching");
       return;
@@ -782,12 +768,6 @@ function CallsContent() {
               </label>
             </div>
 
-            {isEvaluator && (
-              <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 flex items-center gap-2">
-                <span className="font-bold">🔒 Evaluator Preview:</span> Live carrier calling is restricted to authorized business owners.
-              </div>
-            )}
-
             <DialogFooter className="gap-2 pt-2">
               <Button
                 type="button"
@@ -800,12 +780,10 @@ function CallsContent() {
               </Button>
               <Button
                 type="submit"
-                disabled={isDialing || !dncConfirmed || !consentConfirmed || isEvaluator}
-                className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold shadow-xs disabled:opacity-50"
+                disabled={isDialing || !dncConfirmed || !consentConfirmed}
+                className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold shadow-xs"
               >
-                {isEvaluator ? (
-                  "🔒 Calling Restricted (Evaluator Preview)"
-                ) : isDialing ? (
+                {isDialing ? (
                   <>
                     <Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" />
                     Connecting Carrier PSTN...

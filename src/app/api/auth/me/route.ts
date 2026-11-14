@@ -10,7 +10,6 @@ export async function GET() {
     userId: session.userId,
     email: session.email,
     role: session.role,
-    isEvaluator: session.isEvaluator,
     organizationId: session.organizationId,
   });
 }

@@ -10,11 +10,13 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DEMO_ACCESS_ENABLED
+      - key: OWNER_CREDENTIAL_FILL_ENABLED
         value: "true"
-      - key: DEMO_EVALUATOR_EMAIL
-        value: preview@voicenexus.ai
-      - key: DEMO_EVALUATOR_PASSWORD
+      - key: OWNER_CREDENTIAL_FILL_KEY
+        sync: false
+      - key: DEV_COMPANY_EMAIL
+        sync: false
+      - key: DEV_COMPANY_PASSWORD
         sync: false
       - key: ALLOWED_ORIGIN
         value: https://gnaniai404.vercel.app
